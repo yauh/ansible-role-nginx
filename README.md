@@ -1,4 +1,4 @@
-# yauh.ngin
+# yauh.nginx
 Ansible role for installing Nginx
 
 ## Requirements
