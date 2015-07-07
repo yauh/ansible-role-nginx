@@ -7,7 +7,7 @@ cert_common_name: ansible.local
 cert_validity_duration: 3650
 create_self_signed_cert: true
 use_ssl: true
-setup_default_site: true
+setup_default_site: false
 default_http_port: 80
 default_ssl_port: 443
 default_htpasswd_file: /etc/nginx/passwdfile

@@ -18,7 +18,7 @@
 
 - name: Configure default placeholder site
   include: defaultsite.yml
-  when: setup_default_site is defined
+  when: setup_default_site == true
 
 - name: Configure sites
   include: sites.yml
