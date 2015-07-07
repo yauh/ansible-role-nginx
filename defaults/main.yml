@@ -1,0 +1,21 @@
+---
+# defaults file for yauh.nginx
+ssl_cert_file: /etc/nginx/ssl/server.crt
+ssl_key_file: /etc/nginx/ssl/server.key
+cert_subj: /C=US/ST=VIRTUAL/L=Ansible Machines/O=DevOps
+cert_common_name: ansible.local
+cert_validity_duration: 3650
+create_self_signed_cert: true
+use_ssl: true
+setup_default_site: true
+default_http_port: 80
+default_ssl_port: 443
+default_htpasswd_file: /etc/nginx/passwdfile
+web_root: /var/www
+web_users:
+  - name: ansible
+    passwdfile: /etc/nginx/passwdfile
+    password: elbisna
+  - name: admin
+    passwdfile: /etc/nginx/passwdfile
+    password: password

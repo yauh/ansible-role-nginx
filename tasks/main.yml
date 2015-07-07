@@ -1,0 +1,39 @@
+---
+# tasks file for yauh.nginx
+- name: Make sure the ansible required dependencies are installed
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  with_items:
+    - python-pycurl
+    - python-pip
+
+- name: Install python library
+  pip: name=passlib
+
+- name: Add the nginx repository
+  apt_repository:
+    repo: ppa:nginx/stable
+
+- name: Install nginx
+  apt: pkg=nginx state=present
+
+- name: Configure default placeholder site
+  include: defaultsite.yml
+  when: setup_default_site is defined
+
+- name: Configure sites
+  include: sites.yml
+  when: site_configs is defined
+
+- name: Configure SSL
+  include: ssl.yml
+  when: use_ssl == true
+
+- name: Set up htpasswd access
+  include: htpasswd.yml
+  when:  web_users is defined
+
+- name: Disable default config for nginx
+  file: path=/etc/nginx/sites-enabled/default state=absent
+
+- name: Finish setup and restart nginx
+  service: name=nginx state=restarted

@@ -1,0 +1,19 @@
+---
+# ssl tasks file for yauh.nginx
+- name: Create ssl directory
+  file: >
+    path=/etc/nginx/ssl/
+    owner=root
+    group=root
+    mode=0755
+    state=directory
+
+- name: Create self-signed SSL cert
+  command: openssl req -new -nodes -x509 -subj "{{ cert_subj }}/CN={{ cert_common_name }}" -days {{ cert_validity_duration }} -keyout {{ ssl_key_file }} -out {{ ssl_cert_file }} -extensions v3_ca creates={{ ssl_cert_file }}
+  when: create_self_signed_cert
+
+- name: Copy a file
+  copy: src={{ item.src_file }} dest=/etc/nginx/ssl/{{ item.dest_name }} owner=root group=www-data mode=0640
+  with_items:
+    - "{{ certificate_files }}"
+  when: certificate_files is defined

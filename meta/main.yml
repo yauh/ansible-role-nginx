@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Stephan Hochhaus
+  description: Installing Nginx
+  company: freelance
+  license: BSD
+  min_ansible_version: 1.7
+  platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - utopic
+        - vivid
+  categories:
+   - web
+dependencies: []
