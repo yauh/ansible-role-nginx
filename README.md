@@ -1,5 +1,5 @@
 # yauh.nginx
-Ansible role for installing Nginx
+Ansible role for setting up Nginx web server
 
 ## Requirements
 SSH access to the remote machine

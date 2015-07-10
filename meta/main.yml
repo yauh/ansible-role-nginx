@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Stephan Hochhaus
-  description: Installing Nginx
+  description: Set up Nginx web server
   company: freelance
   license: BSD
   min_ansible_version: 1.7
