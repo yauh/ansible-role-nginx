@@ -1,18 +1,18 @@
 # {{ ansible_managed }}
 server {
     server_name {{ ansible_fqdn }};
-    listen {{ default_http_port }};
+    listen {{ nginx_default_http_port }};
 
     index index.html;
-    root {{ web_root }};
+    root {{ nginx_web_root }};
 
     access_log /var/log/nginx/{{ ansible_fqdn }}_access.log combined;
     error_log /var/log/nginx/{{ ansible_fqdn }}_error.log warn;
 
     {% if use_ssl == true %}
-    listen {{ default_ssl_port }} ssl;
-    ssl_certificate {{ ssl_cert_file }};
-    ssl_certificate_key {{ ssl_key_file }};
+    listen {{ nginx_default_ssl_port }} ssl;
+    ssl_certificate {{ nginx_ssl_cert_file }};
+    ssl_certificate_key {{ nginx_ssl_key_file }};
     ssl_session_cache shared:SSL:10m;
     ssl_session_timeout 10m;
     ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DH+3DES:DES-CBC3-SHA:!ADH:!AECDH:!MD5;
@@ -24,7 +24,7 @@ server {
     add_header X-Content-Type-Options nosniff;
     ssl_stapling on;
     ssl_stapling_verify on;
-    ssl_trusted_certificate {{ ssl_cert_file }};
+    ssl_trusted_certificate {{ nginx_ssl_cert_file }};
     resolver 8.8.8.8 8.8.4.4;
     {% endif %}
 
@@ -42,9 +42,9 @@ server {
 
     location /index.html {
       index /index.html;
-      {% if web_users is defined %}
+      {% if nginx_web_users is defined %}
       auth_basic "Restricted";
-      auth_basic_user_file {{ default_htpasswd_file }};
+      auth_basic_user_file {{ nginx_default_htpasswd_file }};
       {% endif %}
     }
 

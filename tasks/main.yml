@@ -18,19 +18,19 @@
 
 - name: Configure default placeholder site
   include: defaultsite.yml
-  when: setup_default_site == true
+  when: nginx_setup_default_site == true
 
 - name: Configure sites
   include: sites.yml
-  when: site_configs is defined
+  when: nginx_site_configs is defined
 
 - name: Configure SSL
   include: ssl.yml
-  when: use_ssl == true
+  when: nginx_use_ssl == true
 
 - name: Set up htpasswd access
   include: htpasswd.yml
-  when:  web_users is defined
+  when:  nginx_web_users is defined
 
 - name: Disable default config for nginx
   file: path=/etc/nginx/sites-enabled/default state=absent

@@ -3,11 +3,11 @@
 - name: Configure sites
   template: src={{ item.src_template }} dest=/etc/nginx/sites-available/{{ item.dest_name }}
   with_items:
-    - "{{ site_configs }}"
-  when: site_configs is defined
+    - "{{ nginx_site_configs }}"
+  when: nginx_site_configs is defined
 
 - name: Enable sites
   file: src=/etc/nginx/sites-available/{{ item.dest_name }} dest=/etc/nginx/sites-enabled/{{ item.dest_name }} state=link
   with_items:
-    - "{{ site_configs }}"
-  when: site_configs is defined
+    - "{{ nginx_site_configs }}"
+  when: nginx_site_configs is defined

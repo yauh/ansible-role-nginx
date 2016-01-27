@@ -4,10 +4,10 @@
   template: src=ansible-placeholder.conf.j2 dest=/etc/nginx/sites-available/ansible-placeholder.conf
 
 - name: Ensure root directory for ansible placeholder is present
-  file: path={{ web_root }} state=directory owner=www-data group=www-data mode=0755
+  file: path={{ nginx_web_root }} state=directory owner=www-data group=www-data mode=0755
 
 - name: Copy ansible placeholder HTML
-  template: src=index.html.j2 dest={{ web_root }}/index.html owner=www-data group=www-data mode=0755
+  template: src=index.html.j2 dest={{ nginx_web_root }}/index.html owner=www-data group=www-data mode=0755
 
 - name: Enable ansible default page
   file: src=/etc/nginx/sites-available/ansible-placeholder.conf dest=/etc/nginx/sites-enabled/ansible-placeholder.conf state=link
